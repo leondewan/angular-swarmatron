@@ -4,10 +4,18 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { FilterControlComponent } from './filter-control.component';
+import { SwarmsynthComponent } from './swarmsynth.component';
+import { KnobComponent } from './knob.component';
+import { Debounce } from './debounce.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FilterControlComponent,
+    SwarmsynthComponent,
+    KnobComponent,
+    Debounce
   ],
   imports: [
     BrowserModule,
