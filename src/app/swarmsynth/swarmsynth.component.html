@@ -1,0 +1,22 @@
+<div id="swarmatron">
+    <div id="mainpanel" class="group">
+        <ul class="mainswitchrow">
+            <filter-control (cutval)="setCut($event)" (qval)="setQ($event)"></filter-control>
+        </ul>
+
+        <select [(ngModel)]='selectedPreset' (ngModelChange)='setToPresets($event)'>
+            <option *ngFor="let p of presets" [ngValue]="p">{{p.name}}</option>
+        </select>
+        <div class="saver">
+            <button (click)="saveBox.hidden = false">Save As Preset</button>
+            <div #saveBox [hidden]="true">
+                <span>name:</span><input type="text"  #presetName/>
+                <button (click) = "savePreset(presetName.value)">save</button>
+            </div>
+        </div>
+    </div>
+    <div id="ribbonpanel">
+        <div id="ribbonholder">
+        </div>
+    </div>
+</div>

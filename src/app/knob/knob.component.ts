@@ -1,18 +1,18 @@
 import { Component, OnChanges, HostListener, EventEmitter, Input, Output, ElementRef} from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
-import { Debounce } from './debounce.directive';
+import { Debounce } from '../utils/debounce.directive';
 
 @Component({
 	  selector: 'knob',
 	    template: `
-			<div class="knob" (mousedown)='initiateDrag($event)'>
+			<li class="knob" (mousedown)='initiateDrag($event)'>
 				<label><ng-content></ng-content></label>					
 				<div class="body">
 					<div class="pointer"></div>
 				</div>
 				<input type="text" [ngModel]='boxValue' debounce [delay]= "700" (func)="boxChange($event)"/>
-			</div>
+			</li>
 		  	`,
 			styleUrls:['./knob.component.css']
 })
@@ -38,7 +38,6 @@ export class KnobComponent implements OnChanges {
 
 	@HostListener('window:mouseup')
 	onmouseup(){
-		console.log('clicked knob off');
 		this.mouseDown = false;
 	}
 	
@@ -51,6 +50,8 @@ export class KnobComponent implements OnChanges {
 	}
 
 	rotateKnob(){
+		if(this.turnValue>150) this.turnValue=150;
+		if(this.turnValue<-150) this.turnValue=-150;
 		this.knob.style.transform = 'rotate(' + this.turnValue + 'deg)';
 	}
 

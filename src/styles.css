@@ -1,11 +1,53 @@
 /* You can add global styles to this file, and also import other style files */
+
+body{
+	font:16px 'Open Sans', sans-serif;
+}
+
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+header {
+	font-size: 1.5em;
+	font-style: bold;
+	margin-top:30px;
+	margin-left:10%;
+}
+
+ul {
+	list-style-type: none;
+	margin:0;
+	padding:0;
+}
+
+li {
+	float:left;
+}
+
 label {
-	font:1em 'PT Sans', sans-serif;
-	color:#566;
-	text-shadow: #acc 1px 1px 0;
-	width:100%;
-	text-align:center;
-	position:absolute;
-	left:0;
-	top:20px;
+    font:1em 'PT Sans', sans-serif;
+    color:#566;
+    text-shadow: #acc 1px 1px 0;
+    width:100%;
+    text-align:center;
+    position:absolute;
+    left:0;
+    top:20px;
+}
+
+main, footer {
+	margin-left:5%;
+}
+
+p {
+	width:75%;
+}
+
+
+footer {
+	font-size:.75em;
+	margin-top:30px;
 }

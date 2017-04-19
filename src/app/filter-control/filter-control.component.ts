@@ -1,26 +1,28 @@
 import { Component, EventEmitter, Input, Output} from '@angular/core';
-import { ScalingMath } from './scaling-math';
-import { SwarmsynthComponent } from './swarmsynth.component'
-import { KnobComponent } from './knob.component';
+import { ScalingMath } from '../utils/scaling-math';
+import { SwarmsynthComponent } from '../swarmsynth/swarmsynth.component';
+import { KnobComponent } from '../knob/knob.component';
 
 @Component({
 	selector: 'filter-control',
 	template: `
-		<knob [turnValue]='getCutTurnValue()' 			
-		(turnValueChange)=setCutFromKnob($event)
-		(valChange) = setCutoff($event)
-		[(boxValue)] = "cutoff">FRQ</knob>
-		<br />
-
 		<knob [turnValue]='getQTurnValue()' 
 		(turnValueChange)=setQFromKnob($event)
 		(valChange)=setQ($event)
 		[(boxValue)] = "q">Q</knob>
-        `
+
+		<knob [turnValue]='getCutTurnValue()' 			
+		(turnValueChange)=setCutFromKnob($event)
+		(valChange) = setCutoff($event)
+		[(boxValue)] = "cutoff">FRQ</knob>
+        `,
+    styles: [`
+    	
+
+    `]
 })
 
-
-export class FilterControlComponent {
+export class FilterControlComponent{
 
 	@Output() cutval = new EventEmitter<any>();
 	@Output() qval = new EventEmitter<any>();
@@ -35,14 +37,13 @@ export class FilterControlComponent {
 		return tvalue;
 	}
 
+	getCutoff(){
+		return this.cutoff;
+	}
+
 	setCutFromKnob(value){
 		let cvalue = this.scalingMath.expScale(value, 3000, 1);
 		this.setCutoff(cvalue);
-	}
-
-	setCutoff(value) {
-		this.cutoff=value;
-		this.cutval.emit(this.cutoff);
 	}
 
 	getQTurnValue() {
@@ -50,9 +51,19 @@ export class FilterControlComponent {
 		return tvalue;
 	}
 
+	getQ(){
+		return this.q;
+	}
+
 	setQFromKnob(value){
 		let qvalue=this.scalingMath.linScale(value, 24);
 		this.setQ(qvalue);
+	}
+
+
+	setCutoff(value) {
+		this.cutoff=value;
+		this.cutval.emit(this.cutoff);
 	}
 
 	setQ(value){
