@@ -10,7 +10,7 @@ import { KnobComponent } from '../knob/knob.component';
 		<knob [turnValue]='getTurnValue("track")' 
 		(turnValueChange)='setFromKnob($event, "track")'
 		(valChange)='setParam($event, "track")'
-		[(boxValue)] = "track">T</knob>
+		[(boxValue)] = "track">TR</knob>
 
 		<knob [turnValue]='getTurnValue("q")' 
 		(turnValueChange)='setFromKnob($event, "q")'

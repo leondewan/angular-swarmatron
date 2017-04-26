@@ -79,10 +79,8 @@ export class SwarmsynthComponent implements OnInit {
     pSwitches: Array<PushSwitchComponent>;
 
     constructor( private PresetService: PresetService ) {
-        
         this.scalingMath=new ScalingMath;
         this.cluster=new Cluster;
-        
     }
 
     getPresets(): void {
@@ -215,6 +213,7 @@ export class SwarmsynthComponent implements OnInit {
     }
 
     setToPresets(selectedPreset){
+        console.log(selectedPreset);
         if(this.pSwitches) this.setVoiceState(selectedPreset);
 
         this.filterControl.setParam(selectedPreset.track, 'track');
@@ -230,12 +229,26 @@ export class SwarmsynthComponent implements OnInit {
 
     }
 
+    presetButton(){
+        let saveSpan=this.boxEl.nativeElement.querySelector('span');
+        let presetButton=this.boxEl.nativeElement.querySelector('button');
+        
+        if(saveSpan.hidden) {
+            saveSpan.hidden=false;
+            presetButton.innerHTML="Cancel";
+        }
+        else {
+            saveSpan.hidden=true;
+            presetButton.innerHTML="Save Settings";
+        }
+    }
+
     savePreset(name){
         if(name) {
             this.voicesState.length=0;
 
             this.pSwitches.forEach((pSwitch, i) => {
-                this.voicesState.push(pSwitch.voiceOn);
+                this.voicesState.push(pSwitch.voiceOn);    
             });
 
             console.log(this.voicesState);
@@ -243,20 +256,20 @@ export class SwarmsynthComponent implements OnInit {
             this.PresetService.writePreset(name,
             this.voicesState, 
             this.ribbonTrack, 
-            this.filter.Q,  
+            this.filter.Q.value,  
             this.knobCutoff,
             this.filtenv.envSettings.filterEnv,
             this.drive,
             this.volenv.envSettings.attackTime,
             this.volenv.envSettings.decayTime,
             this.volenv.envSettings.sustainLevel,
-            this.volenv.envSettings.releaseTime
-
-        )};
-
-        console.log('filtersettings' + this.filtenv.envSettings.filterEnv);
-        this.boxEl.nativeElement.hidden=true;
-        this.boxEl.nativeElement.querySelector('input').value="";
+            this.volenv.envSettings.releaseTime)
+            
+            this.boxEl.nativeElement.querySelector('span').hidden=true;
+            this.boxEl.nativeElement.querySelector('input').value="";
+            this.boxEl.nativeElement.querySelector('button').innerHTML="Save Settings";
+        };
+        
     }
 
     ngAfterViewInit(){

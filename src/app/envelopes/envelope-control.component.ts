@@ -49,7 +49,7 @@ export class EnvelopeControlComponent implements OnInit {
   		this.scalingMap={
   			'attack': ['expScale', 'revExpScale', 10, 2], 
   			'decay': ['expScale', 'revExpScale', 5, 1],
-  			'sustain': ['expScale', 'revExpScale', 1, 6],
+  			'sustain': ['expScale', 'revExpScale', 1, 3],
   			'release':['expScale', 'revExpScale', 5, 2]
   		}
   	}

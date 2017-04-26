@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Debounce } from '../utils/debounce.directive';
 
 @Component({
-	  selector: 'knob',
+	  	selector: 'knob',
 	    template: `
 			<li class="knob" >
 				<label><ng-content></ng-content></label>					
