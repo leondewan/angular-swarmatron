@@ -6,73 +6,74 @@ import { KnobComponent } from '../knob/knob.component';
 @Component({
 	selector: 'filter-control',
 	template: `
-		<knob [turnValue]='getQTurnValue()' 
-		(turnValueChange)=setQFromKnob($event)
-		(valChange)=setQ($event)
+		
+		<knob [turnValue]='getTurnValue("track")' 
+		(turnValueChange)='setFromKnob($event, "track")'
+		(valChange)='setParam($event, "track")'
+		[(boxValue)] = "track">T</knob>
+
+		<knob [turnValue]='getTurnValue("q")' 
+		(turnValueChange)='setFromKnob($event, "q")'
+		(valChange)='setParam($event, "q")'
 		[(boxValue)] = "q">Q</knob>
 
-		<knob [turnValue]='getCutTurnValue()' 			
-		(turnValueChange)=setCutFromKnob($event)
-		(valChange) = setCutoff($event)
+		<knob [turnValue]='getTurnValue("cutoff")' 			
+		(turnValueChange)='setFromKnob($event, "cutoff")'
+		(valChange) = 'setParam($event, "cutoff")'
 		[(boxValue)] = "cutoff">FRQ</knob>
-        `,
-    styles: [`
-    	
-
-    `]
+        `
 })
 
 export class FilterControlComponent{
-
 	@Output() cutval = new EventEmitter<any>();
 	@Output() qval = new EventEmitter<any>();
+	@Output() trackval = new EventEmitter<any>();
 
-	scalingMath: any;
+	scalingMath: ScalingMath;
+	scalingMap: any;
 
 	cutoff: number=0;
 	q: number = 0;
-	
-	getCutTurnValue(){
-		let tvalue=this.scalingMath.revExpScale(this.cutoff, 3000, 1);
-		return tvalue;
-	}
+	track: number = 0;
 
-	getCutoff(){
-		return this.cutoff;
-	}
-
-	setCutFromKnob(value){
-		let cvalue = this.scalingMath.expScale(value, 3000, 1);
-		this.setCutoff(cvalue);
-	}
-
-	getQTurnValue() {
-		let tvalue=this.scalingMath.revLinScale(this.q, 24);
-		return tvalue;
-	}
-
-	getQ(){
-		return this.q;
-	}
-
-	setQFromKnob(value){
-		let qvalue=this.scalingMath.linScale(value, 24);
-		this.setQ(qvalue);
-	}
-
-
-	setCutoff(value) {
-		this.cutoff=value;
-		this.cutval.emit(this.cutoff);
-	}
-
-	setQ(value){
-		this.q=value;
-		this.qval.emit(this.q);
-	}
-
+	//cut q track
 	constructor(){
 		this.scalingMath = new ScalingMath;
+		this.scalingMap={
+  			'cutoff':['binScale', 'revBinScale', 156, 6], 
+  			'q': ['linScale', 'revLinScale', 24],
+  			'track': ['linScale', 'revLinScale', 1]
+  		}
 	}
+
+	getTurnValue(src){
+  		return this.scalingMath[this.scalingMap[src][1]](this[src], this.scalingMap[src][2], this.scalingMap[src][3]);
+  	}
+
+  	setFromKnob(value, src){
+  		let x=this.scalingMath[this.scalingMap[src][0]](value, this.scalingMap[src][2], this.scalingMap[src][3]);
+		this.setParam(x, src);
+  	}
+
+  	setParam(val, src){ 
+  		this[src]=val;
+
+  		switch (src) {
+  			case "cutoff":
+  				this.cutval.emit(val);
+  				break;
+
+  			case "q":
+  				this.qval.emit(val);
+  				break;
+
+  			case "track":
+  				this.trackval.emit(val);
+  				break;
+  			
+  			default:
+  				break;
+  		}
+  	}
 
 }

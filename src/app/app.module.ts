@@ -10,6 +10,12 @@ import { KnobComponent } from './knob/knob.component';
 import { Debounce } from './utils/debounce.directive';
 import { PitchRibbonComponent } from './pitch-ribbon/pitch-ribbon.component';
 import { SwarmRibbonComponent } from './swarm-ribbon/swarm-ribbon.component';
+import { EnvelopeControlComponent } from './envelopes/envelope-control.component';
+import { FilterEnvComponent } from './envelopes/filter-env.component';
+import { Drive } from './drive/drive.component'
+import { Volume } from './volume/volume.component'
+import { PushSwitchComponent } from './switches/push-switch.component'
+import { ToggleSwitchComponent } from './switches/toggle-switch.component'
 
 @NgModule({
   declarations: [
@@ -19,7 +25,13 @@ import { SwarmRibbonComponent } from './swarm-ribbon/swarm-ribbon.component';
     KnobComponent,
     Debounce,
     PitchRibbonComponent,
-    SwarmRibbonComponent
+    SwarmRibbonComponent,
+    EnvelopeControlComponent,
+    FilterEnvComponent,
+    Drive,
+    Volume,
+    PushSwitchComponent,
+    ToggleSwitchComponent
   ],
   imports: [
     BrowserModule,

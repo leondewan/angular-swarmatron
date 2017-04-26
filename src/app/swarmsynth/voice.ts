@@ -12,7 +12,19 @@ export class Voice  {
         this.vca.gain.value=vol;
 
         this.vco.connect(this.vca);
-        //this.vco.start(0);
+
+    }
+
+    setFrequency(freq){
+        this.vco.frequency.value=freq;
+    }
+
+    voiceOn(){
+        this.vca.gain.value=0.125;
+    }
+
+    voiceOff(){
+        this.vca.gain.value=0;
     }
 
     voiceConnect(dest, chan1, chan2) {

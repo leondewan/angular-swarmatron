@@ -15,4 +15,18 @@
 	box-shadow: 1px 2px 2px #333;
 	top:3px;
 }
+
+@media (max-width: 915px) {
+	#swarm-ribbon {
+        margin-top:10px;
+        margin-bottom:5px;
+    }
+}
+
+@media (max-width:620px){
+	 #swarm-ribbon {
+        margin-top:7px;
+        margin-bottom:0;
+    }
+}
 	

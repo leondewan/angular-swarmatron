@@ -1,22 +1,43 @@
 <div id="swarmatron">
     <div id="mainpanel" class="group">
+        <label class="voices">VOICES 1 - 8 </label>
+
         <ul class="mainswitchrow">
-            <filter-control (cutval)="setCut($event)" (qval)="setQ($event)"></filter-control>
+            <volume (setvol)='setVolume($event)'></volume>
+            <li *ngFor="let v of this.vx.voices; let i=index"><push-switch (pushVal) = 'toggleVoice($event, i)' [powered] = 'this.powered'></push-switch></li>
+            <toggle-switch (toggleVal)='togglePower($event)'></toggle-switch>
         </ul>
 
-        <select [(ngModel)]='selectedPreset' (ngModelChange)='setToPresets($event)'>
-            <option *ngFor="let p of presets" [ngValue]="p">{{p.name}}</option>
-        </select>
-        <div class="saver">
-            <button (click)="saveBox.hidden = false">Save As Preset</button>
-            <div #saveBox [hidden]="true">
-                <span>name:</span><input type="text"  #presetName/>
-                <button (click) = "savePreset(presetName.value)">save</button>
+        <ul class="mainknobrow">
+            <filter-control (cutval)="setKnobCut($event)" 
+            (qval)="setQ($event)"
+            (trackval)=setTrack($event)></filter-control>
+            <filter-env (filterN) = "setFilterN($event)"></filter-env>
+            <drive (drive) = "setDrive($event)"></drive>
+        </ul>
+        <ul class="mainknobrow">
+            <envelope-control (att) = "setAtt($event)"
+                (dec) = "setDec($event)"
+                (sus) = "setSus($event)"
+                (rel) = "setRel($event)"></envelope-control>
+        </ul>
+        <div class="presetmanager">
+            <select [(ngModel)]='selectedPreset' (ngModelChange)='setToPresets($event)'>
+                <option *ngFor="let p of presets" [ngValue]="p">{{p.name}}</option>
+            </select>
+            <div class="savepreset">
+                <button (click)="save.hidden=false">Save Current</button>
+                <span #save [hidden]="true" >
+                    <input type="text"  #presetName placeholder="name"/>
+                    <button (click) = "savePreset(presetName.value)">save</button>
+                </span>
             </div>
         </div>
     </div>
     <div id="ribbonpanel">
         <div id="ribbonholder">
+            <pitch-ribbon (setCenterNote)="setCenterNote($event)" (gate)="gate($event)"></pitch-ribbon>
+            <swarm-ribbon (setSwarm) = "setSwarmInterval($event)"></swarm-ribbon>
         </div>
     </div>
 </div>

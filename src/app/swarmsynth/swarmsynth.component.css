@@ -4,7 +4,6 @@
     width:90%;
     max-width:1000px;
     margin-top:50px;
-    background:#88aaaa;
 }
 
 
@@ -60,6 +59,10 @@
     margin-top:20px;
 }
 
+.mainswitchrow {
+    margin-top:30px;
+}
+
 :host >>> .mainknobrow li {
     float:left;
     margin:10px 40px;
@@ -70,7 +73,11 @@
     margin:10px 15px;
 }   
 
-:host >>> .mainswitchrow li.knob, .mainswitchrow li.toggleswitch {
+:host >>> .mainswitchrow li.knob  {
+    margin-top:15px;
+}
+
+:host >>> .mainswitchrow li.toggleswitch {
     margin-top:15px;
 }
 
@@ -82,6 +89,46 @@
     margin-left:50px;
 }
 
+.presetmanager {
+    width:80%;
+    text-align: left;
+    position:relative;
+}
+
+.presetmanager button{
+    position:relative;
+    background:#609090;
+    background-image: radial-gradient(farthest-corner at 10px 5px , #699 0%, #366 75%);
+    border-radius:5px;
+    border:1px #7aa outset;
+    color:#fa3;
+    font-family: .75em 'Nixie One', cursive;
+    /*text-shadow: #853 1px 2px 1px;*/
+    line-height:16px;
+    margin-left:10px;
+
+}
+
+.presetmanager button:active {
+    border:1px #7aa inset;
+    top:1px;left:1px;
+}
+
+.presetmanager input {
+    background:#609090;
+    background-image: radial-gradient(farthest-corner at 10px 5px , #699 0%, #366 75%);
+    border:none;
+    border:1px #7aa outset;
+    border-radius:4px;
+    color:#fa3;
+    font: 1em 'Nixie One', cursive;
+    /*text-shadow: #853 1px 2px 1px;*/
+    height:18px;
+    line-height:18px;
+    margin-left:10px;
+}
+
+
 select {
     background:#609090;
     background-image: radial-gradient(farthest-corner at 10px 5px , #699 0%, #366 75%);
@@ -91,14 +138,115 @@ select {
     color:#fa3;
     font: 0.8em 'Nixie One', cursive;
     text-shadow: #853 1px 2px 1px;
+    height:22px; line-height: 22px;
 }
 
-.saver { 
+.savepreset{ 
     margin-top:20px;
+    display:inline-block;
 }
 
-.saver span {
+.savepreset span {
     padding-right:5px;
     color:eff;
     font: 0.8em 'Nixie One', cursive;
 }
+
+
+@media (max-width: 1100px) {
+    :host >>> .mainswitchrow li.knob {
+        margin-right:35px;
+    }
+
+    :host >>> .mainswitchrow li.toggleswitch {
+        margin-left:35px;
+    }
+
+    :host >>> .mainswitchrow li {
+        margin-left:10px;
+        margin-right:10px;
+    }
+
+    :host >>> .mainknobrow li {
+        margin-left:30px;
+        margin-right:30px;
+    }
+ }
+
+ @media (max-width: 915px) {
+    #mainpanel {
+        padding-bottom:0;
+    }
+
+    .mainknobrow {
+        margin-top:10px;
+    }
+
+    .mainswitchrow {
+        margin-top:20px;
+    }
+
+    :host >>> .mainswitchrow li.knob {
+        margin-right:20px;
+    }
+
+    :host >>> .mainswitchrow li.toggleswitch {
+        margin-left:20px;
+    }
+
+    :host >>> .mainswitchrow li {
+        margin-left:5px;
+        margin-right:5px;
+    }
+
+    :host >>> .mainknobrow li {
+        margin-left:20px;
+        margin-right:20px;
+    }
+ }
+
+ @media (max-width: 760px) {
+    :host >>> .mainswitchrow li.knob {
+        margin-right:10px;
+    }
+
+    :host >>> .mainswitchrow li.toggleswitch {
+        margin-left:10px;
+    }
+
+    :host >>> .mainswitchrow li {
+        margin-left:2px;
+        margin-right:2px;
+    }
+
+    :host >>> .mainknobrow li {
+        margin-left:15px;
+        margin-right:15px;
+    }
+ }
+
+ @media (max-width:620px){
+    
+
+    #mainpanel, #ribbonpanel {
+        padding:10px;
+    }
+
+    label.voices {
+        top:4px;
+    }
+
+    .mainknobrow, .mainswitchrow {
+        margin-top:7px;
+    }
+
+    :host >>> .mainknobrow li, .mainswitchrow li {
+        margin-top: 5px;
+        margin-bottom:5px;
+    }   
+
+    :host >>> .mainswitchrow li.knob, .mainswitchrow li.toggleswitch {
+        margin-top:10px;
+    }
+ }
+

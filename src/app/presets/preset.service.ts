@@ -15,11 +15,19 @@ export class PresetService {
         }
     }
 
-    writePreset(name, cutoff, q){
+    writePreset(name, voicemap, track, q, cutoff, filtenv, drive, attack, decay, sustain, release){
     	var newPreset={
             'name':name,
+            'voicemap':voicemap,
+            'track':track,
+            'qval':q,
             'cutval':cutoff,
-            'qval': q
+            'filtenv':filtenv,
+            'drive':drive,
+            'attack':attack,
+            'decay':decay,
+            'sustain':sustain,
+            'release':release
         }
 
         Presets.push(newPreset);

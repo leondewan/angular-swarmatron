@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { SwarmsynthComponent } from './swarmsynth.component';
+import { SwarmsynthComponent } from './swarmsynth/swarmsynth.component';
 
 @Component({
   	selector: 'app-root',
