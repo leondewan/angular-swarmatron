@@ -98,7 +98,6 @@ export class SwarmsynthComponent implements OnInit {
     }
 
     togglePower(val){
-        console.log("togglePower: " + val);
         this.powered=val;
         for (let pSwitch of this.pSwitches){
             if(val) pSwitch.powerOn();
@@ -213,7 +212,6 @@ export class SwarmsynthComponent implements OnInit {
     }
 
     setToPresets(selectedPreset){
-        console.log(selectedPreset);
         if(this.pSwitches) this.setVoiceState(selectedPreset);
 
         this.filterControl.setParam(selectedPreset.track, 'track');
@@ -251,8 +249,6 @@ export class SwarmsynthComponent implements OnInit {
                 this.voicesState.push(pSwitch.voiceOn);    
             });
 
-            console.log(this.voicesState);
-
             this.PresetService.writePreset(name,
             this.voicesState, 
             this.ribbonTrack, 
@@ -263,7 +259,10 @@ export class SwarmsynthComponent implements OnInit {
             this.volenv.envSettings.attackTime,
             this.volenv.envSettings.decayTime,
             this.volenv.envSettings.sustainLevel,
-            this.volenv.envSettings.releaseTime)
+            this.volenv.envSettings.releaseTime);
+
+            console.log(this.presets);
+            this.selectedPreset=(this.presets[this.presets.length-1]);
             
             this.boxEl.nativeElement.querySelector('span').hidden=true;
             this.boxEl.nativeElement.querySelector('input').value="";

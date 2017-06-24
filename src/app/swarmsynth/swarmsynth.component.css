@@ -2,10 +2,9 @@
 #swarmatron {
     text-align:center;
     width:90%;
-    max-width:1000px;
-    margin-top:50px;
+    max-width:950px;
+    margin:auto;
 }
-
 
 #mainpanel {
     position:relative;
@@ -24,7 +23,6 @@
     border-right: 10px #aaa ridge;
     border-radius:10px 10px 0 0;
 }
-
 
 #ribbonpanel {
     position:relative;
@@ -57,36 +55,39 @@
     margin:auto;
     clear:both;
     margin-top:20px;
-}
-
-.mainswitchrow {
-    margin-top:30px;
+    transition:margin-top 0.5s;
 }
 
 :host >>> .mainknobrow li {
     float:left;
     margin:10px 40px;
+    transition:margin 0.5s;
 }
 
 :host >>> .mainswitchrow li {
     float:left;
     margin:10px 15px;
+    transition:margin 0.5s;
 }   
 
 :host >>> .mainswitchrow li.knob  {
     margin-top:15px;
+    transition:margin-top 0.5s;
 }
 
 :host >>> .mainswitchrow li.toggleswitch {
     margin-top:15px;
+    transition:margin-top 0.5s;
 }
 
 :host >>> .mainswitchrow li.knob {
     margin-right:50px;
+    transition:margin-right 0.5s;
 }
 
 :host >>> .mainswitchrow li.toggleswitch {
     margin-left:50px;
+    transition:margin-left 0.5s;
 }
 
 .presetmanager {
@@ -98,69 +99,104 @@
 
 .presetmanager button{
     position:relative;
-    background:#609090;
-    background-image: radial-gradient(farthest-corner at 10px 5px , #699 0%, #366 75%);
+    background:#8aa;
+    border:2px #acc solid;
+    border-bottom-color:#647878;
+    border-right-color:#647878;
     border-radius:5px;
-    border:1px #7aa outset;
-    color:#fa3;
-    font-family: .75em 'Nixie One', cursive;
-    /*text-shadow: #853 1px 2px 1px;*/
+    font:0.75em 'PT Sans', sans-serif;
+    color:#022;
+    text-shadow: #acc 1px 1px 0;
     line-height:16px;
     margin-left:10px;
+    outline:none;
 
 }
 
 .presetmanager button:active {
-    border:1px #7aa inset;
+    border:2px #acc solid;
+    border-top-color:#647878;
+    border-left-color:#647878;
     top:1px;left:1px;
 }
 
 .presetmanager button:disabled {
-    border:none;
-    background:#609090;
-    color:#aaa;
+    border:1px #699 solid;
+    color:#566;
 }
 
 .presetmanager input {
     background:#609090;
-    background-image: radial-gradient(farthest-corner at 10px 5px , #699 0%, #366 75%);
+    background-image: radial-gradient(#699 0%, #366 75%);
     border:none;
-    border:1px #7aa outset;
+    border:1px #7aa solid;
+    border-top-color:#3c5656;
+    border-left-color:#3c5656;
     border-radius:4px;
     color:#fa3;
-    font: 1em 'Nixie One', cursive;
-    /*text-shadow: #853 1px 2px 1px;*/
-    height:18px;
+    font-size:0.75em;
     line-height:18px;
+    height:22px;
     margin-left:10px;
+    outline:none;
+    padding:0 5px;
 }
 
-
 select {
+    -moz-appearance:window;
     background:#609090;
-    background-image: radial-gradient(farthest-corner at 10px 5px , #699 0%, #366 75%);
+    background-image: radial-gradient(#699 0%, #366 75%);
     border:none;
-    border:1px #7aa outset;
+    border:1px #7aa solid;
+    border-top-color:#3c5656;
+    border-left-color:#3c5656;
     border-radius:4px;
     color:#fa3;
-    font: 0.8em 'Nixie One', cursive;
+    font-size:0.8em;
     text-shadow: #853 1px 2px 1px;
-    height:22px; line-height: 22px;
+    line-height: 24px;
+    height:24px;
+    outline:none;
+}
+
+@-moz-document url-prefix() {
+    .css-select-moz{
+        position:relative;
+        background-repeat: no-repeat;
+        background-position: right center;
+        
+        background: url(selectarrows.png) right 5px center no-repeat,
+        -moz-radial-gradient(#699 0%, #366 75%);
+
+
+        border:none;
+        border:1px #7aa solid;
+        border-top-color:#3c5656;
+        border-left-color:#3c5656;
+        border-radius:4px;
+        display:inline-block;
+        height:17px;
+        padding-bottom:5px;
+        padding-right: 15px;
+    }
+
+    .css-select-moz select {
+        margin-right:-15px;
+        padding-right:20px;
+        height:22px;
+    } 
 }
 
 .savepreset{ 
-    /*margin-top:20px;*/
     display:inline-block;
 }
 
 .savepreset span {
     padding-right:5px;
-    color:eff;
-    font: 0.8em 'Nixie One', cursive;
 }
 
 
-@media (max-width: 1100px) {
+@media (max-width: 1050px) {
     :host >>> .mainswitchrow li.knob {
         margin-right:35px;
     }
@@ -180,17 +216,13 @@ select {
     }
  }
 
- @media (max-width: 915px) {
+ @media (max-width: 840px) {
     #mainpanel {
-        padding-bottom:0;
+        padding-bottom:15px;
     }
 
     .mainknobrow {
         margin-top:10px;
-    }
-
-    .mainswitchrow {
-        margin-top:20px;
     }
 
     :host >>> .mainswitchrow li.knob {
@@ -212,7 +244,7 @@ select {
     }
  }
 
- @media (max-width: 760px) {
+ @media (max-width: 690px) {
     :host >>> .mainswitchrow li.knob {
         margin-right:10px;
     }
@@ -233,10 +265,12 @@ select {
  }
 
  @media (max-width:620px){
-    
-
     #mainpanel, #ribbonpanel {
         padding:10px;
+    }
+
+    #mainpanel {
+        padding-bottom:20px;
     }
 
     label.voices {

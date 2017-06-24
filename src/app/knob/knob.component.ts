@@ -40,22 +40,8 @@ export class KnobComponent implements OnChanges {
 	knob:any;
 	
 	constructor(private elRef:ElementRef, private renderer:Renderer) {}
-
-/*
-	function isTextInput(node) {
-    return ['INPUT', 'TEXTAREA'].indexOf(node.nodeName) !== -1;
-}
-
-document.addEventListener('touchstart', function(e) {
-    if (!isTextInput(e.target) && isTextInput(document.activeElement)) {
-        document.activeElement.blur();
-    }
-}, false);*/
-
 	@HostListener('window:touchstart', ['$event'])
 	onTouchEvent(event:TouchEvent){
-		//console.log(event.target);
-		//document.activeElement.blur();
 		this.renderer.invokeElementMethod(
      this.elRef.nativeElement.ownerDocument.activeElement, 'blur');
 	}
@@ -73,17 +59,12 @@ document.addEventListener('touchstart', function(e) {
 	initiateDrag($event){
 		this.mouseDown=true;
 		this.touchStarted=true;
-		console.log('initiating drag');
 		$event.preventDefault();
 		this.prevTurnValue=this.turnValue;
 		if($event.touches) this.turnStart=$event.changedTouches[0].clientY;
 		else this.turnStart=$event.clientY;
 
 	}
-
-	/*stopProp(event){
-		event.stopPropagation();
-	}*/
 
 	rotateKnob(){
 		if(this.turnValue>150) this.turnValue=150;

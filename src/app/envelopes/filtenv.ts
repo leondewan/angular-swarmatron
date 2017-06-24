@@ -9,7 +9,6 @@ export class Filtenv {
 		this.context=context;
 		this.filter=filter;
 		this.envSettings= envSettings;
-        console.log(this.envSettings);
 	}
 
 	filtEnvelope(n){

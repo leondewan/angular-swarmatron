@@ -1,5 +1,4 @@
 
-
 .knob {
 	position:relative;
 	width:40px;
@@ -37,15 +36,16 @@
 	height:14px;
 	line-height:14px;
 	padding:2px;
-	background:#609090;
-	background-image: radial-gradient(farthest-corner at 10px 5px , #9bb 0%, #699 75%);
+	background:#366;
+	background-image: radial-gradient(#699 0%, #366 75%);
 	border:none;
 	border:1px #699 solid;
 	border-right-color: #8bb;
 	border-bottom-color: #8bb;
 	border-radius:4px;
 	color:#fa3;
-	font: 0.75em 'Nixie One', cursive;
+	font-size: 0.75em;
+	font-weight:bold;
 	text-shadow: #853 1px 2px 1px;
 	text-align: center;
 }
