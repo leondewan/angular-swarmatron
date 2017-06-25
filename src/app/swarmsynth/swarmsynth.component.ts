@@ -60,6 +60,8 @@ export class SwarmsynthComponent implements OnInit {
 
     startup:boolean=false;
 
+    linearEnv:boolean=false;
+
     @ViewChild('save') boxEl:ElementRef;
 
     @ViewChild(FilterControlComponent)
@@ -81,6 +83,16 @@ export class SwarmsynthComponent implements OnInit {
     constructor( private PresetService: PresetService ) {
         this.scalingMath=new ScalingMath;
         this.cluster=new Cluster;
+        //This code is a bug fix for firefox v48 with respect to setTargetTime, an exponential Webaudio paramater decay.
+        var ua = navigator.userAgent.toLowerCase();
+        if(ua.indexOf('firefox')!=-1){
+            var startfox=ua.indexOf('firefox');
+            var startver=startfox+8;
+            var endver=startver+2; 
+            var foxVersion=parseInt(ua.substring(startver, endver));
+            if(foxVersion < 49) this.linearEnv=true;
+        }
+    //end bug fix code
     }
 
     getPresets(): void {
@@ -121,10 +133,10 @@ export class SwarmsynthComponent implements OnInit {
         
         this.envNode=this.audioContext.createGain();
         this.envNode.gain.value=0;
-        this.volenv = new Volenv(this.audioContext, this.envNode);
+        this.volenv = new Volenv(this.audioContext, this.envNode, this.linearEnv);
 
         this.filter=this.audioContext.createBiquadFilter();
-        this.filtenv=new Filtenv(this.audioContext, this.filter, this.volenv.envSettings);
+        this.filtenv=new Filtenv(this.audioContext, this.filter, this.volenv.envSettings, this.linearEnv);
 
         this.swOverdrive = this.audioContext.createWaveShaper();
         this.swOverdrive.oversample = '4x';
@@ -260,8 +272,7 @@ export class SwarmsynthComponent implements OnInit {
             this.volenv.envSettings.decayTime,
             this.volenv.envSettings.sustainLevel,
             this.volenv.envSettings.releaseTime);
-
-            console.log(this.presets);
+            
             this.selectedPreset=(this.presets[this.presets.length-1]);
             
             this.boxEl.nativeElement.querySelector('span').hidden=true;

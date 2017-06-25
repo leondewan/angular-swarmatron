@@ -3,12 +3,14 @@ import { Envsettings } from './envsettings';
 export class Filtenv {
 	context: AudioContext;
 	filter: BiquadFilterNode;
-	envSettings:Envsettings;
+	envSettings: Envsettings;
+    linearEnv: boolean;
 
-	constructor(context, filter, envSettings){
+	constructor(context, filter, envSettings, linearEnv){
 		this.context=context;
 		this.filter=filter;
 		this.envSettings= envSettings;
+        this.linearEnv=linearEnv;
 	}
 
 	filtEnvelope(n){
@@ -25,15 +27,21 @@ export class Filtenv {
             lastValue=param.value;
             param.cancelScheduledValues(now);
             param.setValueAtTime(lastValue, now);
-            param.linearRampToValueAtTime(filterPeak, now + this.envSettings.attackTime);
-            param.setTargetAtTime(this.envSettings.sustainLevel, now + this.envSettings.attackTime, this.envSettings.decayTime);
+            param.linearRampToValueAtTime(filterPeak, now + this.envSettings.attackTime);            
+
+            if(this.linearEnv) param.linearRampToValueAtTime(0, 
+                now + this.envSettings.attackTime + this.envSettings.decayTime);            
+            else param.setTargetAtTime(this.envSettings.sustainLevel, 
+                now + this.envSettings.attackTime, this.envSettings.decayTime);
             
         } else {
             
             lastValue=param.value;
             param.cancelScheduledValues(now);
             param.setValueAtTime(lastValue||this.envSettings.sustainLevel, now);
-            param.setTargetAtTime(floor, now, this.envSettings.releaseTime);  
+            
+            if(this.linearEnv)param.linearRampToValueAtTime(floor, now + this.envSettings.releaseTime);
+            else param.setTargetAtTime(floor, now, this.envSettings.releaseTime);  
         }      
 	}
 
