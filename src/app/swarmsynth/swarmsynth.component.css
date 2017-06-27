@@ -1,4 +1,9 @@
 
+form {
+    margin:0;
+    padding:0;
+}
+
 #swarmatron {
     text-align:center;
     width:90%;
@@ -263,6 +268,10 @@ select {
  }
 
  @media (max-width:620px){
+    #swarmatron {
+        width: 560px;
+    }
+
     #mainpanel, #ribbonpanel {
         padding:10px;
     }
